@@ -16,11 +16,17 @@
 ## 🌟 Présentation
 
 Bienvenue sur le dépôt officiel du site vitrine de **Shai's Company**.  
-Ce projet moderne et élégant met en lumière nos applications phares :
-- ⏳ **Left To Live** : Une expérience introspective sur le temps qu'il nous reste.
-- 📓 **NotiaNote** : La plateforme intelligente pour la vie scolaire.
+Basée aux Bahamas, notre société développe des technologies innovantes dans plusieurs secteurs d'avenir. Le site met en lumière nos différentes divisions :
 
-Le site est conçu avec les dernières technologies web pour offrir une expérience fluide, immersive et ultra-rapide (Glassmorphism, Dark mode, Animations 3D).
+- 📱 **Applications** : Des plateformes mobiles et web de pointe.
+  - **NotiaNote** : La plateforme intelligente pour la vie scolaire.
+  - **Left To Live** : Une expérience introspective sur le temps qu'il nous reste.
+- 🤖 **Intelligence Artificielle** : Des assistants de traitement de langage naturel (notamment NotiaNote IA).
+- 🌐 **Web3** : Développement d'infrastructures décentralisées, incluant notre futur Wallet.
+- 🎵 **Shai Music** : Notre label musical indépendant dédié au développement de talents d'avant-garde.
+- 📈 **Investissement & Trading** : Nos placements stratégiques, projets internes et opportunités de Copy Trading.
+
+Le site est conçu avec les dernières technologies web pour offrir une expérience fluide, immersive et ultra-rapide (Glassmorphism, Dark mode, Animations).
 
 ## 🛠️ Technologies Utilisées
 
@@ -29,13 +35,10 @@ Ce projet repose sur une stack technique de pointe :
 * **Build Tool** : Vite
 * **Styling & Animations** : Framer Motion, ShaderGradient
 * **3D** : React Three Fiber (Three.js)
-* **Déploiement** : Serveur VPS (Nginx)
 
 ## 📁 Structure du Projet
 
 - `site/` : Code source principal du frontend (React/Vite).
-- `Left To Live/` : Ressources dédiées à l'application Left To Live.
-- `plugins/` : Dépendances et bibliothèques internes.
 
 ## 🚀 Lancement Rapide (Local)
 

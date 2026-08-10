@@ -10,19 +10,9 @@ export default function Contact() {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 1.05 }}
       transition={{ duration: 0.5 }}
-      style={{ position: 'relative', width: '100vw', minHeight: '100vh', backgroundColor: '#000', color: '#fff', overflowX: 'hidden' }}
+      style={{ position: 'relative', width: '100vw', minHeight: '100vh', color: '#fff', overflowX: 'hidden' }}
     >
-      {/* Background Shader Gradient */}
-      <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: 0.3 }}>
-        <ShaderGradientCanvas
-          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}
-        >
-          <ShaderGradient
-            control="query"
-            urlString="https://www.shadergradient.co/customize?animate=on&axesHelper=off&bgColor1=%23000000&bgColor2=%23000000&brightness=1.1&cAzimuthAngle=180&cDistance=3.9&cPolarAngle=115&cameraZoom=1&color1=%235606ff&color2=%23fe8989&color3=%23000000&embedMode=off&envPreset=city&format=gif&fov=45&frameRate=10&gizmoHelper=hide&grain=off&lightType=3d&pixelDensity=1&positionX=-0.5&positionY=0.1&positionZ=0&range=disabled&rangeEnd=40&rangeStart=0&reflection=0.1&rotationX=0&rotationY=0&rotationZ=235&shader=defaults&type=waterPlane&uAmplitude=0&uDensity=1.1&uFrequency=5.5&uSpeed=0.1&uStrength=2.4&uTime=0.2&wireframe=false"
-          />
-        </ShaderGradientCanvas>
-      </div>
+
 
       <div style={{ position: 'relative', zIndex: 1, padding: '40px 20px', maxWidth: '600px', margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '80vh' }}>
         <Link to="/" style={{ display: 'flex', alignSelf: 'flex-start', alignItems: 'center', gap: '8px', color: '#aaa', textDecoration: 'none', marginBottom: '40px', fontSize: '1.1rem' }}>
@@ -37,7 +27,7 @@ export default function Contact() {
           <h1 style={{ fontFamily: '"Playfair Display", serif', fontSize: '3rem', marginBottom: '16px' }}>Support & Contact</h1>
           
           <p style={{ color: '#ccc', marginBottom: '48px', fontSize: '1.1rem', lineHeight: '1.6' }}>
-            Vous rencontrez un problème avec Left To Live, vous avez une question, ou vous souhaitez demander la suppression de vos données personnelles ? Nous sommes là pour vous aider.
+            Que vous ayez une question sur l'une de nos applications, que vous souhaitiez candidater pour Shai Music, ou pour toute autre demande (support, suppression de données personnelles), notre équipe est à votre écoute.
           </p>
 
           <a href="mailto:contact@shaiscompany.com" style={{ 
