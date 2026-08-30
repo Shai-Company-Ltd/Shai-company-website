@@ -7,10 +7,11 @@ export default function Applications() {
     {
       id: 'notianote',
       name: 'NotiaNote',
-      description: 'Un service gratuit et open source qui vous permet d\'accéder à vos données EcoleDirecte avec une interface moderne et améliorée. Aucune donnée personnelle stockée sur nos serveurs.',
+      description: 'La plateforme de vie scolaire nouvelle génération. Accédez à vos données avec une interface moderne et améliorée. Déjà adoptée par des milliers d\'établissements.',
       icon: <img src="/logos/notianote.png" alt="NotiaNote" style={{ width: '48px', height: '48px', objectFit: 'contain' }} />,
       status: 'Disponible',
       links: [
+        { title: 'Site Web', url: 'https://notianote.fr', type: 'external', icon: <ExternalLink size={16} /> },
         { title: 'App Store', url: 'https://apps.apple.com/fr/app/notianote/id6758548199', type: 'external', icon: <ExternalLink size={16} /> },
         { title: 'Confidentialité', url: '/notianote/privacy', type: 'internal', icon: <ShieldCheck size={16} /> },
         { title: 'CGU', url: '/notianote/cgu', type: 'internal', icon: <FileText size={16} /> }
@@ -23,7 +24,7 @@ export default function Applications() {
       icon: <img src="/logos/left-to-live.png" alt="Left To Live" style={{ width: '48px', height: '48px', objectFit: 'contain' }} />,
       status: 'Disponible',
       links: [
-        { title: 'App Store', url: 'https://apps.apple.com/', type: 'external', icon: <ExternalLink size={16} /> },
+        { title: 'App Store', url: 'https://apps.apple.com/fr/app/left-to-live/id6793693539', type: 'external', icon: <ExternalLink size={16} /> },
         { title: 'Confidentialité', url: '/left-to-live/privacy', type: 'internal', icon: <ShieldCheck size={16} /> },
         { title: 'CGU', url: '/left-to-live/cgu', type: 'internal', icon: <FileText size={16} /> }
       ]
@@ -49,13 +50,13 @@ export default function Applications() {
       transition={{ duration: 0.5 }}
       style={{ position: 'relative', width: '100vw', minHeight: '100vh', color: '#fff', overflowX: 'hidden' }}
     >
-      <div style={{ position: 'relative', zIndex: 1, padding: '40px 20px', maxWidth: '1000px', margin: '0 auto', display: 'flex', flexDirection: 'column', minHeight: '80vh' }}>
+      <div className="section-padding" style={{ position: 'relative', zIndex: 1, padding: '40px 20px', maxWidth: '1000px', margin: '0 auto', display: 'flex', flexDirection: 'column', minHeight: '80vh' }}>
         <Link to="/" style={{ display: 'flex', alignSelf: 'flex-start', alignItems: 'center', gap: '8px', color: '#aaa', textDecoration: 'none', marginBottom: '60px', fontSize: '1.1rem' }}>
           <ArrowLeft size={20} /> Retour à l'accueil
         </Link>
         
         <div style={{ marginBottom: '60px' }}>
-          <h1 style={{ fontFamily: '"Playfair Display", serif', fontSize: '4rem', marginBottom: '16px', letterSpacing: '0.02em' }}>
+          <h1 className="page-title" style={{ fontFamily: '"Playfair Display", serif', fontSize: '4rem', marginBottom: '16px', letterSpacing: '0.02em' }}>
             Nos Applications
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.2rem', fontFamily: 'Inter, sans-serif', maxWidth: '600px', lineHeight: 1.6 }}>
@@ -70,6 +71,7 @@ export default function Applications() {
             hidden: {},
             visible: { transition: { staggerChildren: 0.2 } }
           }}
+          className="bento-grid"
           style={{ 
             display: 'grid', 
             gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))', 
@@ -82,6 +84,7 @@ export default function Applications() {
               variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
               whileHover={{ y: -8, scale: 1.02, boxShadow: '0 20px 40px rgba(0,0,0,0.5) inset, 0 10px 30px rgba(255,255,255,0.05)' }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="app-card"
               style={{ 
                 background: 'rgba(255, 255, 255, 0.03)', 
                 backdropFilter: 'blur(24px)', 
@@ -95,7 +98,7 @@ export default function Applications() {
                 overflow: 'hidden'
               }}
             >
-              <div style={{ position: 'absolute', top: '-5%', right: '-5%', fontSize: '12rem', fontWeight: 800, color: 'rgba(255,255,255,0.02)', lineHeight: 0.8, pointerEvents: 'none' }}>0{index + 1}</div>
+              <div className="bg-number" style={{ position: 'absolute', top: '-5%', right: '-5%', fontSize: '12rem', fontWeight: 800, color: 'rgba(255,255,255,0.02)', lineHeight: 0.8, pointerEvents: 'none' }}>0{index + 1}</div>
               
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px' }}>
                 <div style={{ background: 'rgba(255,255,255,0.05)', padding: '12px', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -116,7 +119,7 @@ export default function Applications() {
                 </span>
               </div>
               
-              <h3 style={{ fontSize: '2.5rem', color: '#fff', fontFamily: 'Inter, sans-serif', fontWeight: 600, margin: '0 0 16px 0' }}>
+              <h3 className="app-card-title" style={{ fontSize: '2.5rem', color: '#fff', fontFamily: 'Inter, sans-serif', fontWeight: 600, margin: '0 0 16px 0' }}>
                 {app.name}
               </h3>
               

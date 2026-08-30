@@ -1,0 +1,26 @@
+Politique de Confidentialité - Sex Map
+
+Dernière mise à jour : 10 Août 2026
+
+1. Données collectées
+Lors de l'utilisation de Sex Map, nous collectons les données suivantes :
+- Données de compte : Adresse e-mail pour l'authentification (via Firebase Authentication).
+- Données d'utilisation : Position géographique (latitude et longitude des événements que vous enregistrez), titre et notes des événements.
+- Données techniques : Informations sur les plantages (via Firebase Crashlytics) pour améliorer la stabilité de l'application.
+
+2. Utilisation des données
+Vos données sont utilisées exclusivement pour faire fonctionner l'Application :
+- Vous permettre de visualiser vos événements sur votre carte personnelle.
+- Partager ces événements avec vos amis si vous décidez de rejoindre un groupe privé.
+
+3. Partage des données
+Vos événements ne sont visibles que par vous et les membres des groupes privés que vous avez rejoints. Nous ne revendons aucune donnée personnelle à des tiers. Nous affichons des annonces publicitaires via Google AdMob, qui peut utiliser un identifiant publicitaire pour diffuser des annonces pertinentes.
+
+4. Sécurité
+L'ensemble de vos données est stocké de manière sécurisée sur les serveurs de Google (Firebase) avec un chiffrement en transit (HTTPS).
+
+5. Suppression des données
+Vous pouvez à tout moment demander la suppression de votre compte et de toutes vos données associées en contactant notre support ou via notre site web : https://shaiscompany.com/contact
+
+6. Contact
+Pour toute question, veuillez nous contacter à : contact@shaiscompany.com

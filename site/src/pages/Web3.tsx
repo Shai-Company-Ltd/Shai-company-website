@@ -38,21 +38,21 @@ export default function Web3() {
       transition={{ duration: 0.5 }}
       style={{ position: 'relative', width: '100vw', minHeight: '100vh', color: '#fff', overflowX: 'hidden' }}
     >
-      <div style={{ position: 'relative', zIndex: 1, padding: '40px 20px', maxWidth: '1000px', margin: '0 auto', display: 'flex', flexDirection: 'column', minHeight: '80vh' }}>
+      <div className="section-padding" style={{ position: 'relative', zIndex: 1, padding: '40px 20px', maxWidth: '1200px', margin: '0 auto', display: 'flex', flexDirection: 'column', minHeight: '80vh' }}>
         <Link to="/" style={{ display: 'flex', alignSelf: 'flex-start', alignItems: 'center', gap: '8px', color: '#aaa', textDecoration: 'none', marginBottom: '60px', fontSize: '1.1rem' }}>
           <ArrowLeft size={20} /> Retour à l'accueil
         </Link>
         
         <div style={{ marginBottom: '60px', display: 'flex', alignItems: 'center', gap: '24px' }}>
           <div>
-            <h1 style={{ fontFamily: '"Playfair Display", serif', fontSize: '4rem', margin: 0, letterSpacing: '0.02em' }}>
-              Web3
+            <h1 className="page-title" style={{ fontFamily: '"Playfair Display", serif', fontSize: '4rem', margin: 0, letterSpacing: '0.02em' }}>
+              Shai Web3
             </h1>
           </div>
         </div>
 
-        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.3rem', fontFamily: 'Inter, sans-serif', maxWidth: '800px', lineHeight: 1.6, marginBottom: '80px' }}>
-          Le Web3 représente l'avenir d'internet. Nous développons actuellement notre tout premier portefeuille numérique (Wallet) décentralisé. Une révolution en matière de sécurité, de transparence et d'expérience utilisateur.
+        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.2rem', maxWidth: '800px', lineHeight: 1.6, marginBottom: '64px' }}>
+          Nous construisons l'infrastructure financière de demain. Shai Web3 se concentre sur le développement d'outils décentralisés, sécurisés et accessibles à tous, avec pour point culminant la création de notre propre écosystème cryptographique.
         </p>
 
         {/* Countdown Section */}
@@ -112,6 +112,7 @@ export default function Web3() {
             hidden: {},
             visible: { transition: { staggerChildren: 0.15 } }
           }}
+          className="bento-grid"
           style={{ 
             display: 'grid', 
             gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 

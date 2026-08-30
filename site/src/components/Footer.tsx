@@ -16,7 +16,7 @@ export default function Footer() {
       <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '24px', alignItems: 'center' }}>
         <img src="/logo.png" alt="Shai Company ltd." style={{ height: '48px', width: 'auto', objectFit: 'contain', opacity: 0.8 }} />
         <div style={{ fontWeight: 600, color: 'var(--text-color)', letterSpacing: '0.05em' }}>Shai Company ltd.</div>
-        <div style={{ display: 'flex', gap: '24px' }}>
+        <div className="footer-links" style={{ display: 'flex', gap: '24px' }}>
           <Link to="/privacy" style={{ opacity: 0.7 }}>Politique de Confidentialité</Link>
           <Link to="/cgu" style={{ opacity: 0.7 }}>CGU</Link>
           <Link to="/contact" style={{ opacity: 0.7 }}>Contact</Link>

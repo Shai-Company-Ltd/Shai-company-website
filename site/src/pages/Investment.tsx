@@ -11,7 +11,7 @@ export default function Investment() {
       transition={{ duration: 0.5 }}
       style={{ position: 'relative', width: '100vw', minHeight: '100vh', color: '#fff', overflowX: 'hidden' }}
     >
-      <div style={{ position: 'relative', zIndex: 1, padding: '40px 20px', maxWidth: '1000px', margin: '0 auto', display: 'flex', flexDirection: 'column', minHeight: '80vh' }}>
+      <div className="section-padding" style={{ position: 'relative', zIndex: 1, padding: '40px 20px', maxWidth: '1000px', margin: '0 auto', display: 'flex', flexDirection: 'column', minHeight: '80vh' }}>
         <Link to="/" style={{ display: 'flex', alignSelf: 'flex-start', alignItems: 'center', gap: '8px', color: '#aaa', textDecoration: 'none', marginBottom: '60px', fontSize: '1.1rem' }}>
           <ArrowLeft size={20} /> Retour à l'accueil
         </Link>
@@ -19,8 +19,8 @@ export default function Investment() {
         <div style={{ marginBottom: '60px', display: 'flex', alignItems: 'center', gap: '24px' }}>
           <img src="/logos/shai-invest.png" alt="Shai Invest" style={{ height: '80px', width: 'auto', objectFit: 'contain' }} />
           <div>
-            <h1 style={{ fontFamily: '"Playfair Display", serif', fontSize: '4rem', margin: 0, letterSpacing: '0.02em' }}>
-              Investissement
+            <h1 className="page-title" style={{ fontFamily: '"Playfair Display", serif', fontSize: '4rem', margin: 0, letterSpacing: '0.02em' }}>
+              Investissement & Trading
             </h1>
           </div>
         </div>
@@ -36,6 +36,7 @@ export default function Investment() {
             hidden: {},
             visible: { transition: { staggerChildren: 0.15 } }
           }}
+          className="bento-grid"
           style={{ 
             display: 'grid', 
             gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 

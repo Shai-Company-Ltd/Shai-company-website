@@ -1,0 +1,21 @@
+Conditions Générales d'Utilisation (CGU) - Sex Map
+
+Dernière mise à jour : 10 Août 2026
+
+1. Acceptation des conditions
+En téléchargeant et en utilisant l'application Sex Map (ci-après "l'Application"), vous acceptez d'être lié par les présentes Conditions Générales d'Utilisation.
+
+2. Description du service
+L'Application permet aux utilisateurs d'enregistrer des événements personnels sur une carte interactive, d'afficher des statistiques, et de partager ces événements de manière chiffrée avec d'autres utilisateurs au sein de groupes privés.
+
+3. Accès au service
+L'utilisation de l'Application est strictement réservée aux personnes âgées de 18 ans et plus. L'Application requiert la création d'un compte avec une adresse e-mail et un mot de passe.
+
+4. Responsabilité de l'utilisateur
+Vous êtes seul responsable des contenus et des informations que vous publiez ou partagez sur l'Application. Vous vous engagez à ne pas utiliser l'Application à des fins illégales, abusives ou pour partager du contenu choquant publiquement.
+
+5. Sécurité
+Nous mettons en place des mesures de sécurité pour protéger vos données (Firebase, TLS). Toutefois, vous êtes responsable de la confidentialité de vos identifiants de connexion.
+
+6. Modifications
+Nous nous réservons le droit de modifier ces CGU à tout moment. Les utilisateurs seront informés de tout changement majeur.

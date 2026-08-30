@@ -1,19 +1,31 @@
 import { ShaderGradientCanvas, ShaderGradient } from 'shadergradient'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { useEffect, useRef } from 'react'
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { Menu, X } from 'lucide-react'
 
 export default function Home() {
   const navigate = useNavigate();
   const { scrollY } = useScroll()
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
+  
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   
   const progress = useTransform(scrollY, [0, 400], [0, 1])
   
-  // Title dynamically moves from center to top-left next to the logo
-  const titleLeft = useTransform(progress, (p) => `calc(50vw - (50vw - 114px) * ${p})`)
-  const titleTop = useTransform(progress, (p) => `calc(50vh - (50vh - 60px) * ${p})`)
-  const titleX = useTransform(progress, (p) => `-${50 * (1 - p)}%`)
-  const titleScale = useTransform(scrollY, [0, 400], [1, 0.28])
+  // Title dynamically moves from center to top-left next to the logo on desktop
+  // On mobile, it just fades out and moves up slightly
+  const titleLeft = useTransform(progress, (p) => isMobile ? '50vw' : `calc(50vw - (50vw - 114px) * ${p})`)
+  const titleTop = useTransform(progress, (p) => isMobile ? `calc(50vh - 100px * ${p})` : `calc(50vh - (50vh - 60px) * ${p})`)
+  const titleX = useTransform(progress, (p) => isMobile ? '-50%' : `-${50 * (1 - p)}%`)
+  const titleScale = useTransform(scrollY, [0, 400], [1, isMobile ? 1 : 0.28])
+  const titleOpacity = useTransform(scrollY, [0, 300], [1, isMobile ? 0 : 1])
   
   // "ltd." fades out as it scrolls up
   const ltdOpacity = useTransform(scrollY, [0, 200], [1, 0])
@@ -47,18 +59,50 @@ export default function Home() {
       </style>
       
       {/* Fixed Site Logo at Top Left */}
-      <div style={{ position: 'fixed', top: '40px', left: '48px', zIndex: 50, display: 'flex', alignItems: 'center', gap: '16px' }}>
+      <div className="logo-mobile" style={{ position: 'fixed', top: '40px', left: '48px', zIndex: 50, display: 'flex', alignItems: 'center', gap: '16px' }}>
         <img src="/logo.png" alt="Shai Company LTD" style={{ height: '40px', width: 'auto', filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.5))' }} />
       </div>
 
-      {/* Top Navigation Links (Sans fond) */}
-      <div style={{ position: 'fixed', top: '40px', right: '48px', height: '40px', zIndex: 50, display: 'flex', alignItems: 'center', gap: '32px' }}>
+      {/* Top Navigation Links (Desktop) */}
+      <div className="nav-desktop" style={{ position: 'fixed', top: '40px', right: '48px', height: '40px', zIndex: 50, display: 'flex', alignItems: 'center', gap: '32px' }}>
         <Link to="/apps" style={{ color: '#fff', textDecoration: 'none', fontSize: '0.9rem', letterSpacing: '0.05em', textTransform: 'uppercase', opacity: 0.8 }}>Applications</Link>
         <Link to="/invest" style={{ color: '#fff', textDecoration: 'none', fontSize: '0.9rem', letterSpacing: '0.05em', textTransform: 'uppercase', opacity: 0.8 }}>Investissement</Link>
         <Link to="/web3" style={{ color: '#fff', textDecoration: 'none', fontSize: '0.9rem', letterSpacing: '0.05em', textTransform: 'uppercase', opacity: 0.8 }}>Web3</Link>
         <Link to="/music" style={{ color: '#fff', textDecoration: 'none', fontSize: '0.9rem', letterSpacing: '0.05em', textTransform: 'uppercase', opacity: 0.8 }}>Music</Link>
         <Link to="/ia" style={{ color: '#fff', textDecoration: 'none', fontSize: '0.9rem', letterSpacing: '0.05em', textTransform: 'uppercase', opacity: 0.8 }}>IA</Link>
       </div>
+
+      {/* Hamburger Button (Mobile) */}
+      <div className="nav-mobile" style={{ position: 'fixed', top: '40px', right: '24px', zIndex: 60, display: 'none', alignItems: 'center' }}>
+        <button 
+          onClick={() => setIsMenuOpen(!isMenuOpen)} 
+          style={{ background: 'transparent', border: 'none', color: '#fff', cursor: 'pointer', display: 'flex', padding: '8px' }}
+        >
+          {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            style={{ 
+              position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', 
+              background: 'rgba(0,0,0,0.95)', backdropFilter: 'blur(20px)', zIndex: 55, 
+              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '32px' 
+            }}
+          >
+            <Link to="/apps" onClick={() => setIsMenuOpen(false)} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.5rem', textTransform: 'uppercase' }}>Applications</Link>
+            <Link to="/invest" onClick={() => setIsMenuOpen(false)} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.5rem', textTransform: 'uppercase' }}>Investissement</Link>
+            <Link to="/web3" onClick={() => setIsMenuOpen(false)} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.5rem', textTransform: 'uppercase' }}>Web3</Link>
+            <Link to="/music" onClick={() => setIsMenuOpen(false)} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.5rem', textTransform: 'uppercase' }}>Music</Link>
+            <Link to="/ia" onClick={() => setIsMenuOpen(false)} style={{ color: '#fff', textDecoration: 'none', fontSize: '1.5rem', textTransform: 'uppercase' }}>IA</Link>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
 
 
@@ -80,39 +124,60 @@ export default function Home() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            zIndex: 60
+            opacity: titleOpacity
           }}
         >
           <div style={{
-            padding: '0 64px'
+            padding: isMobile ? '0 16px' : '0 64px'
           }}>
-            <h1 style={{ 
-              display: 'flex',
-              alignItems: 'baseline',
-              gap: '16px',
-              fontSize: '5rem', 
-              fontFamily: '"Playfair Display", serif', 
-              fontWeight: 600, 
-              letterSpacing: '0.05em', 
-              margin: 0,
-              textShadow: '0 4px 12px rgba(0,0,0,0.3)',
-              whiteSpace: 'nowrap'
-            }}>
-              <span>Shai Company</span>
-              <motion.span style={{ opacity: ltdOpacity }}>ltd.</motion.span>
-            </h1>
+            {isMobile ? (
+              <h1 style={{ 
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                fontSize: '16vw', 
+                fontFamily: '"Playfair Display", serif', 
+                fontWeight: 600, 
+                lineHeight: 1.1,
+                margin: 0,
+                textShadow: '0 4px 12px rgba(0,0,0,0.3)',
+                textAlign: 'center'
+              }}>
+                <span>Shai</span>
+                <span>Company</span>
+                <motion.span style={{ opacity: ltdOpacity, fontSize: '8vw', marginTop: '8px' }}>ltd.</motion.span>
+              </h1>
+            ) : (
+              <h1 className="hero-title" style={{ 
+                display: 'flex',
+                alignItems: 'baseline',
+                gap: '16px',
+                fontSize: '5rem', 
+                fontFamily: '"Playfair Display", serif', 
+                fontWeight: 600, 
+                letterSpacing: '0.05em', 
+                margin: 0,
+                textShadow: '0 4px 12px rgba(0,0,0,0.3)',
+                whiteSpace: 'nowrap'
+              }}>
+                <span>Shai Company</span>
+                <motion.span style={{ opacity: ltdOpacity }}>ltd.</motion.span>
+              </h1>
+            )}
           </div>
 
-          <motion.h2 style={{ 
+          <motion.h2 className="hero-subtitle" style={{ 
             opacity: sloganOpacity,
-            fontSize: '1.2rem', 
+            fontSize: isMobile ? '0.9rem' : '1.2rem', 
             fontWeight: 300, 
             color: '#ffffff', 
             fontFamily: 'Inter, sans-serif', 
-            letterSpacing: '0.3em', 
+            letterSpacing: isMobile ? '0.15em' : '0.3em', 
             textTransform: 'uppercase', 
             textShadow: '0 2px 10px rgba(0,0,0,0.5)',
-            textAlign: 'center'
+            textAlign: 'center',
+            marginTop: isMobile ? '24px' : '0',
+            padding: isMobile ? '0 16px' : '0'
           }}>
             Shaping the future across multiple dimensions.
           </motion.h2>
@@ -130,7 +195,7 @@ export default function Home() {
       </div>
 
       {/* BENTO GRID SECTION (POLES) */}
-      <section style={{ 
+      <section className="section-padding" style={{ 
         position: 'relative', 
         zIndex: 10, 
         padding: '120px 48px', 
@@ -146,11 +211,11 @@ export default function Home() {
           transition={{ duration: 0.8 }}
           style={{ width: '100%', maxWidth: '1200px' }}
         >
-          <div style={{ marginBottom: '64px' }}>
-            <h2 style={{ fontSize: '3rem', fontFamily: '"Playfair Display", serif', fontWeight: 600, color: '#fff', margin: '0 0 16px 0', letterSpacing: '0.02em' }}>
+          <div style={{ marginBottom: '48px' }}>
+            <h2 className="section-title" style={{ fontSize: '3rem', fontFamily: '"Playfair Display", serif', fontWeight: 600, color: '#fff', margin: '0 0 16px 0', letterSpacing: '0.02em' }}>
               Nos Pôles d'Excellence.
             </h2>
-            <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.2rem', fontFamily: 'Inter, sans-serif', maxWidth: '600px', lineHeight: 1.6 }}>
+            <p className="section-subtitle" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.2rem', fontFamily: 'Inter, sans-serif', maxWidth: '600px', lineHeight: 1.6 }}>
               Shai Company LTD développe des solutions de pointe à travers cinq dimensions stratégiques.
             </p>
           </div>
@@ -165,6 +230,7 @@ export default function Home() {
                 transition: { staggerChildren: 0.15 }
               }
             }}
+            className="bento-grid"
             style={{ 
               display: 'grid', 
               gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
@@ -179,6 +245,7 @@ export default function Home() {
               whileHover={{ y: -8, scale: 1.01, boxShadow: '0 40px 80px rgba(0,0,0,0.6) inset, 0 10px 30px rgba(86,6,255,0.2)' }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
               onClick={() => navigate('/apps')}
+              className="bento-item-span-2"
               style={{ 
                 cursor: 'pointer',
                 gridColumn: 'span 2', 
@@ -198,13 +265,13 @@ export default function Home() {
                 boxShadow: '0 30px 60px rgba(0,0,0,0.4) inset'
               }}
             >
-              <div style={{ position: 'absolute', top: '-10%', right: '-5%', fontSize: '15rem', fontWeight: 800, color: 'rgba(255,255,255,0.02)', lineHeight: 0.8, pointerEvents: 'none' }}>01</div>
+              <div className="bg-number" style={{ position: 'absolute', top: '-10%', right: '-5%', fontSize: '15rem', fontWeight: 800, color: 'rgba(255,255,255,0.02)', lineHeight: 0.8, pointerEvents: 'none' }}>01</div>
               <div style={{ position: 'absolute', top: 0, right: 0, width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(86,6,255,0.3) 0%, transparent 70%)', transform: 'translate(30%, -30%)' }}></div>
-              <div style={{ position: 'absolute', top: '32px', left: '40px' }}>
+              <div className="bento-card-badge" style={{ position: 'absolute', top: '32px', left: '40px' }}>
                 <span style={{ background: 'rgba(255,255,255,0.1)', padding: '6px 12px', borderRadius: '100px', fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#fff' }}>Écosystème</span>
               </div>
-              <h3 style={{ fontSize: '2.5rem', color: '#fff', fontFamily: 'Inter, sans-serif', fontWeight: 600, margin: '0 0 12px 0' }}>Applications</h3>
-              <p style={{ color: 'rgba(255,255,255,0.6)', fontFamily: 'Inter', margin: 0, maxWidth: '70%', fontSize: '1.1rem', lineHeight: 1.5 }}>Plateformes mobiles et web de pointe. Nous concevons des interfaces ultra-fluides centrées sur l'expérience utilisateur et la performance.</p>
+              <h3 className="app-card-title" style={{ fontSize: '2.5rem', color: '#fff', fontFamily: 'Inter, sans-serif', fontWeight: 600, margin: '0 0 12px 0' }}>Applications</h3>
+              <p className="bento-card-desc" style={{ color: 'rgba(255,255,255,0.6)', fontFamily: 'Inter', margin: 0, maxWidth: '70%', fontSize: '1.1rem', lineHeight: 1.5 }}>Plateformes mobiles et web de pointe. Nous concevons des interfaces ultra-fluides centrées sur l'expérience utilisateur et la performance.</p>
             </motion.div>
 
             {/* 2. WEB3 */}
@@ -228,8 +295,8 @@ export default function Home() {
                 overflow: 'hidden'
               }}
             >
-              <div style={{ position: 'absolute', top: '-10%', right: '-5%', fontSize: '15rem', fontWeight: 800, color: 'rgba(255,255,255,0.02)', lineHeight: 0.8, pointerEvents: 'none' }}>02</div>
-              <h3 style={{ fontSize: '1.8rem', color: '#fff', fontFamily: 'Inter, sans-serif', fontWeight: 600, margin: '0 0 12px 0' }}>Web3</h3>
+              <div className="bg-number" style={{ position: 'absolute', top: '-10%', right: '-5%', fontSize: '15rem', fontWeight: 800, color: 'rgba(255,255,255,0.02)', lineHeight: 0.8, pointerEvents: 'none' }}>02</div>
+              <h3 className="app-card-title" style={{ fontSize: '1.8rem', color: '#fff', fontFamily: 'Inter, sans-serif', fontWeight: 600, margin: '0 0 12px 0' }}>Web3</h3>
               <p style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Inter', margin: 0, fontSize: '0.95rem', lineHeight: 1.5 }}>L'infrastructure décentralisée de demain.</p>
             </motion.div>
 
@@ -254,8 +321,8 @@ export default function Home() {
                 overflow: 'hidden'
               }}
             >
-              <div style={{ position: 'absolute', top: '-10%', right: '-5%', fontSize: '15rem', fontWeight: 800, color: 'rgba(255,255,255,0.02)', lineHeight: 0.8, pointerEvents: 'none' }}>03</div>
-              <h3 style={{ fontSize: '1.8rem', color: '#fff', fontFamily: 'Inter, sans-serif', fontWeight: 600, margin: '0 0 12px 0' }}>IA</h3>
+              <div className="bg-number" style={{ position: 'absolute', top: '-10%', right: '-5%', fontSize: '15rem', fontWeight: 800, color: 'rgba(255,255,255,0.02)', lineHeight: 0.8, pointerEvents: 'none' }}>03</div>
+              <h3 className="app-card-title" style={{ fontSize: '1.8rem', color: '#fff', fontFamily: 'Inter, sans-serif', fontWeight: 600, margin: '0 0 12px 0' }}>IA</h3>
               <p style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Inter', margin: 0, fontSize: '0.95rem', lineHeight: 1.5 }}>Intelligence artificielle & automatisation poussée.</p>
             </motion.div>
 
@@ -280,8 +347,8 @@ export default function Home() {
                 overflow: 'hidden'
               }}
             >
-              <div style={{ position: 'absolute', top: '-10%', right: '-5%', fontSize: '15rem', fontWeight: 800, color: 'rgba(255,255,255,0.02)', lineHeight: 0.8, pointerEvents: 'none' }}>04</div>
-              <h3 style={{ fontSize: '1.8rem', color: '#fff', fontFamily: 'Inter, sans-serif', fontWeight: 600, margin: '0 0 12px 0' }}>Investissement</h3>
+              <div className="bg-number" style={{ position: 'absolute', top: '-10%', right: '-5%', fontSize: '15rem', fontWeight: 800, color: 'rgba(255,255,255,0.02)', lineHeight: 0.8, pointerEvents: 'none' }}>04</div>
+              <h3 className="app-card-title" style={{ fontSize: '1.8rem', color: '#fff', fontFamily: 'Inter, sans-serif', fontWeight: 600, margin: '0 0 12px 0' }}>Investissement</h3>
               <p style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Inter', margin: 0, fontSize: '0.95rem', lineHeight: 1.5 }}>Stratégies & capitaux pour disrupter les marchés.</p>
             </motion.div>
 
@@ -304,9 +371,9 @@ export default function Home() {
                 overflow: 'hidden'
               }}
             >
-              <div style={{ position: 'absolute', top: '-10%', right: '-5%', fontSize: '15rem', fontWeight: 800, color: 'rgba(255,255,255,0.02)', lineHeight: 0.8, pointerEvents: 'none' }}>05</div>
+              <div className="bg-number" style={{ position: 'absolute', top: '-10%', right: '-5%', fontSize: '15rem', fontWeight: 800, color: 'rgba(255,255,255,0.02)', lineHeight: 0.8, pointerEvents: 'none' }}>05</div>
               <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '100%', background: 'linear-gradient(45deg, rgba(254,137,137,0.1), transparent)', zIndex: -1 }}></div>
-              <h3 style={{ fontSize: '1.8rem', color: '#fff', fontFamily: 'Inter, sans-serif', fontWeight: 600, margin: '0 0 12px 0' }}>Music</h3>
+              <h3 className="app-card-title" style={{ fontSize: '1.8rem', color: '#fff', fontFamily: 'Inter, sans-serif', fontWeight: 600, margin: '0 0 12px 0' }}>Music</h3>
               <p style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Inter', margin: 0, fontSize: '0.95rem', lineHeight: 1.5 }}>Production et innovation musicale.</p>
             </motion.div>
 
@@ -315,7 +382,7 @@ export default function Home() {
       </section>
 
       {/* SHOWCASE PORTFOLIO */}
-      <section style={{ 
+      <section className="section-padding" style={{ 
         position: 'relative', 
         zIndex: 10, 
         padding: '120px 48px', 
@@ -327,19 +394,19 @@ export default function Home() {
       }}>
         <div style={{ width: '100%', maxWidth: '1200px', marginBottom: '40px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '20px' }}>
           <div>
-            <h2 style={{ fontSize: '2.5rem', fontFamily: '"Playfair Display", serif', fontWeight: 600, color: '#fff', margin: 0, letterSpacing: '0.02em' }}>
+            <h2 className="section-title" style={{ fontSize: '2.5rem', fontFamily: '"Playfair Display", serif', fontWeight: 600, color: '#fff', margin: 0, letterSpacing: '0.02em' }}>
               L'Écosystème Actif.
             </h2>
-            <p style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Inter', fontSize: '1.1rem', marginTop: '12px', marginBottom: 0 }}>Nos applications et plateformes en production.</p>
+            <p className="section-subtitle" style={{ color: 'rgba(255,255,255,0.5)', fontFamily: 'Inter', fontSize: '1.1rem', marginTop: '12px', marginBottom: 0 }}>Nos applications et plateformes en production.</p>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem', fontFamily: 'Inter', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+          <div className="slider-hint" style={{ display: 'flex', alignItems: 'center', gap: '12px', color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem', fontFamily: 'Inter', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
             <span style={{ fontSize: '1.2rem' }}>←</span>
             <span>Glisser pour explorer</span>
             <span style={{ fontSize: '1.2rem' }}>→</span>
           </div>
         </div>
         
-        <div className="hide-scrollbar" style={{ 
+        <div className="hide-scrollbar showcase-container" style={{ 
           display: 'flex', 
           gap: '32px', 
           width: '100%', 
@@ -349,7 +416,7 @@ export default function Home() {
           scrollSnapType: 'x mandatory'
         }}>
           {/* Card 1 - Investissement */}
-          <div style={{ 
+          <div className="showcase-card" style={{ 
             minWidth: '400px', 
             height: '500px',
             background: 'rgba(255, 255, 255, 0.03)', 
@@ -377,7 +444,7 @@ export default function Home() {
           </div>
 
           {/* Card 2 - SexMap */}
-          <div style={{ 
+          <div className="showcase-card" style={{ 
             minWidth: '400px', 
             height: '500px',
             background: 'rgba(255, 255, 255, 0.03)', 
@@ -406,7 +473,7 @@ export default function Home() {
 
 
           {/* Card 4 - IA */}
-          <div style={{ 
+          <div className="showcase-card" style={{ 
             minWidth: '400px', 
             height: '500px',
             background: 'rgba(255, 255, 255, 0.03)', 
@@ -434,7 +501,7 @@ export default function Home() {
           </div>
 
           {/* Card 5 - Left To Live */}
-          <div style={{ 
+          <div className="showcase-card" style={{ 
             minWidth: '400px', 
             height: '500px',
             background: 'rgba(255, 255, 255, 0.03)', 
@@ -462,7 +529,7 @@ export default function Home() {
           </div>
 
           {/* Card 3 - Music (Moved to last) */}
-          <div style={{ 
+          <div className="showcase-card" style={{ 
             minWidth: '400px', 
             height: '500px',
             background: 'rgba(255, 255, 255, 0.03)', 
@@ -493,7 +560,7 @@ export default function Home() {
 
 
       {/* FOUNDER NOTE (Pure Typography) */}
-      <section style={{ 
+      <section className="quote-section" style={{ 
         position: 'relative', 
         zIndex: 10, 
         padding: '120px 48px', 
@@ -508,7 +575,7 @@ export default function Home() {
           position: 'relative'
         }}>
           {/* Huge decorative quotation mark */}
-          <div style={{ 
+          <div className="quote-mark" style={{ 
             position: 'absolute', 
             top: '-80px', 
             left: '50%', 
@@ -522,7 +589,7 @@ export default function Home() {
             "
           </div>
           
-          <h3 style={{ fontSize: '3rem', fontFamily: '"Playfair Display", serif', fontWeight: 400, color: '#fff', margin: '0 0 40px 0', fontStyle: 'italic', lineHeight: 1.4, textShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
+          <h3 className="quote-text" style={{ fontSize: '3rem', fontFamily: '"Playfair Display", serif', fontWeight: 400, color: '#fff', margin: '0 0 40px 0', fontStyle: 'italic', lineHeight: 1.4, textShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
             L'innovation ne vient pas de ceux qui suivent les règles. Elle vient de ceux qui les réécrivent.
           </h3>
           
@@ -536,7 +603,7 @@ export default function Home() {
 
 
       {/* THE ULTRA-PREMIUM CTA (No boxes, pure typography) */}
-      <section style={{ 
+      <section className="cta-section" style={{ 
         position: 'relative', 
         zIndex: 10, 
         padding: '0 48px 200px 48px', 
@@ -555,11 +622,11 @@ export default function Home() {
           {/* Subtle glowing line above */}
           <div style={{ width: '1px', height: '100px', background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.5))', margin: '0 auto 40px auto' }}></div>
 
-          <h2 style={{ fontSize: '5rem', fontFamily: '"Playfair Display", serif', fontWeight: 600, color: '#fff', margin: '0 0 24px 0', lineHeight: 1.1, letterSpacing: '-0.02em' }}>
+          <h2 className="cta-title" style={{ fontSize: '5rem', fontFamily: '"Playfair Display", serif', fontWeight: 600, color: '#fff', margin: '0 0 24px 0', lineHeight: 1.1, letterSpacing: '-0.02em' }}>
             L'écosystème <br/><span style={{ color: 'rgba(255,255,255,0.3)' }}>vous attend.</span>
           </h2>
           
-          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.2rem', fontFamily: 'Inter, sans-serif', lineHeight: 1.6, marginBottom: '64px' }}>
+          <p className="cta-subtitle" style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.2rem', fontFamily: 'Inter, sans-serif', lineHeight: 1.6, marginBottom: '64px' }}>
             Investisseurs, talents ou partenaires stratégiques.
           </p>
 

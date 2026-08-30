@@ -11,7 +11,7 @@ export default function Music() {
       transition={{ duration: 0.5 }}
       style={{ position: 'relative', width: '100vw', minHeight: '100vh', color: '#fff', overflowX: 'hidden' }}
     >
-      <div style={{ position: 'relative', zIndex: 1, padding: '40px 20px', maxWidth: '1000px', margin: '0 auto', display: 'flex', flexDirection: 'column', minHeight: '80vh' }}>
+      <div className="section-padding" style={{ position: 'relative', zIndex: 1, padding: '40px 20px', maxWidth: '1000px', margin: '0 auto', display: 'flex', flexDirection: 'column', minHeight: '80vh' }}>
         <Link to="/" style={{ display: 'flex', alignSelf: 'flex-start', alignItems: 'center', gap: '8px', color: '#aaa', textDecoration: 'none', marginBottom: '60px', fontSize: '1.1rem' }}>
           <ArrowLeft size={20} /> Retour à l'accueil
         </Link>
@@ -19,7 +19,7 @@ export default function Music() {
         <div style={{ marginBottom: '60px', display: 'flex', alignItems: 'center', gap: '24px' }}>
           <img src="/logos/shai-music.png" alt="Shai Music" style={{ height: '80px', width: 'auto', objectFit: 'contain' }} />
           <div>
-            <h1 style={{ fontFamily: '"Playfair Display", serif', fontSize: '4rem', margin: 0, letterSpacing: '0.02em' }}>
+            <h1 className="page-title" style={{ fontFamily: '"Playfair Display", serif', fontSize: '4rem', margin: 0, letterSpacing: '0.02em' }}>
               Label Musical
             </h1>
           </div>
@@ -35,7 +35,7 @@ export default function Music() {
             Nos Artistes
           </h2>
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '24px' }}>
+          <div className="bento-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '24px' }}>
             {/* Artist 1 */}
             <motion.div 
               whileHover={{ y: -5, scale: 1.02, boxShadow: '0 20px 40px rgba(0,0,0,0.5) inset, 0 10px 30px rgba(86,6,255,0.1)' }}

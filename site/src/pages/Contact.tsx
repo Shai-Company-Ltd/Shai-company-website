@@ -30,9 +30,10 @@ export default function Contact() {
             Que vous ayez une question sur l'une de nos applications, que vous souhaitiez candidater pour Shai Music, ou pour toute autre demande (support, suppression de données personnelles), notre équipe est à votre écoute.
           </p>
 
-          <a href="mailto:contact@shaiscompany.com" style={{ 
+          <a href="mailto:contact@shaiscompany.com" className="contact-btn" style={{ 
             display: 'inline-flex', 
             alignItems: 'center', 
+            justifyContent: 'center',
             gap: '12px', 
             background: '#fff', 
             color: '#000', 
@@ -41,9 +42,12 @@ export default function Contact() {
             textDecoration: 'none', 
             fontWeight: 'bold', 
             fontSize: '1.2rem',
-            boxShadow: '0 8px 24px rgba(255, 255, 255, 0.2)'
+            boxShadow: '0 8px 24px rgba(255, 255, 255, 0.2)',
+            maxWidth: '100%',
+            boxSizing: 'border-box'
           }}>
-            <Mail size={24} /> contact@shaiscompany.com
+            <Mail size={24} style={{ flexShrink: 0 }} /> 
+            <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>contact@shaiscompany.com</span>
           </a>
           
           <p style={{ color: '#888', marginTop: '32px', fontSize: '0.9rem' }}>
