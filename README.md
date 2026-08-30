@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/Dontbyshai/Shai-s-company-website/main/site/public/favicon.ico" alt="Shai's Company Logo" width="100" />
+  <img src="site/public/logo.png" alt="Shai's Company Logo" width="100" />
   
   # Shai's Company Website 🚀
   
@@ -26,7 +26,7 @@ Basée aux Bahamas, notre société développe des technologies innovantes dans 
 - 🎵 **Shai Music** : Notre label musical indépendant dédié au développement de talents d'avant-garde.
 - 📈 **Investissement & Trading** : Nos placements stratégiques, projets internes et opportunités de Copy Trading.
 
-Le site est conçu avec les dernières technologies web pour offrir une expérience fluide, immersive et ultra-rapide (Glassmorphism, Dark mode, Animations).
+Le site est conçu avec les dernières technologies web pour offrir une expérience fluide, immersive et ultra-rapide (Glassmorphism, Dark mode, Animations) avec un support complet et optimisé pour Mobile.
 
 ## 🛠️ Technologies Utilisées
 
@@ -34,29 +34,53 @@ Ce projet repose sur une stack technique de pointe :
 * **Frontend** : React 19 + TypeScript
 * **Build Tool** : Vite
 * **Styling & Animations** : Framer Motion, ShaderGradient
-* **3D** : React Three Fiber (Three.js)
+* **3D & Canvas** : React Three Fiber (Three.js)
 
 ## 📁 Structure du Projet
 
 - `site/` : Code source principal du frontend (React/Vite).
+  - `src/pages/` : Les différentes vues (Accueil, Contact, Apps, etc.)
+  - `src/components/` : Les composants réutilisables (Boutons, Navbar, Footer)
+  - `public/` : Les assets statiques (logos, images, fonts)
 
-## 🚀 Lancement Rapide (Local)
+## 🚀 Installation et Lancement
 
-1. Clonez ce dépôt :
+### Prérequis
+Assurez-vous d'avoir installé :
+- **Node.js** (v18 ou supérieur recommandé)
+- **npm** ou **yarn**
+
+### 1. Cloner le dépôt :
 ```bash
-git clone https://github.com/Dontbyshai/Shai-s-company-website.git
+git clone https://github.com/Shai-Company-Ltd/Shai-company-website.git
 ```
-2. Accédez au dossier du site :
+
+### 2. Accéder au dossier du site :
 ```bash
-cd "Shai-s-company-website/site"
+cd "Shai-company-website/site"
 ```
-3. Installez les dépendances :
+*(Si le dossier principal se nomme `Shai Company Site` sur votre ordinateur, utilisez `cd "Shai Company Site/site"`)*
+
+### 3. Installer les dépendances :
 ```bash
 npm install
 ```
-4. Lancez le serveur de développement :
+
+### 4. Lancer le serveur de développement :
 ```bash
 npm run dev
+```
+Le site sera accessible localement sur `http://localhost:5173`.
+
+## 📦 Build pour la Production
+
+Pour compiler le site et l'optimiser pour la mise en production :
+```bash
+npm run build
+```
+Les fichiers générés se trouveront dans le dossier `site/dist/`. Vous pouvez ensuite tester ce build localement avec :
+```bash
+npm run preview
 ```
 
 ---
