@@ -52,6 +52,8 @@ function App() {
             <Route path="/left-to-live/cgu" element={<Legal type="cgu" project="left-to-live" />} />
             <Route path="/notianote/privacy" element={<Legal type="privacy" project="notianote" />} />
             <Route path="/notianote/cgu" element={<Legal type="cgu" project="notianote" />} />
+            <Route path="/fuel-tracker/privacy" element={<Legal type="privacy" project="fuel-tracker" />} />
+            <Route path="/fuel-tracker/cgu" element={<Legal type="cgu" project="fuel-tracker" />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>

@@ -4,7 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 
 interface LegalProps {
   type: 'privacy' | 'cgu';
-  project?: 'shai' | 'left-to-live' | 'notianote';
+  project?: 'shai' | 'left-to-live' | 'notianote' | 'fuel-tracker';
 }
 
 export default function Legal({ type, project = 'shai' }: LegalProps) {
@@ -345,7 +345,110 @@ export default function Legal({ type, project = 'shai' }: LegalProps) {
     </>
   );
 
+  const renderFuelTrackerPrivacy = () => (
+    <>
+      <h1 style={{ fontFamily: '"Playfair Display", serif', fontSize: '2.5rem', marginBottom: '8px' }}>Politique de Confidentialité</h1>
+      <p style={{ color: '#aaa', marginBottom: '32px' }}>Dernière mise à jour : 9 Octobre 2026</p>
+      
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', lineHeight: '1.6' }}>
+        <p>Cette politique de confidentialité décrit la façon dont l'application Fuel Tracker recueille, utilise et protège vos informations personnelles.</p>
+        
+        <div>
+          <h3 style={{ color: '#fff', marginBottom: '8px' }}>1. Informations que nous collectons</h3>
+          <ul style={{ color: '#ddd', paddingLeft: '20px' }}>
+            <li><strong>Informations de compte</strong> : Lors de la création de votre compte, nous pouvons collecter votre adresse e-mail, votre nom et d'autres informations de profil.</li>
+            <li><strong>Données d'utilisation et véhicules</strong> : Nous recueillons les données que vous saisissez concernant vos véhicules, vos pleins de carburant, vos dépenses et votre kilométrage.</li>
+            <li><strong>Données techniques</strong> : Nous pouvons collecter des informations sur votre appareil, votre système d'exploitation et des journaux de pannes (crash logs) pour améliorer la stabilité de l'application.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 style={{ color: '#fff', marginBottom: '8px' }}>2. Utilisation de vos informations</h3>
+          <p style={{ color: '#ddd' }}>Vos informations sont utilisées pour :</p>
+          <ul style={{ color: '#ddd', paddingLeft: '20px' }}>
+            <li>Fournir, maintenir et améliorer notre service.</li>
+            <li>Calculer vos statistiques de consommation et de dépenses.</li>
+            <li>Sécuriser votre compte (via Firebase Authentication).</li>
+            <li>Vous fournir un support technique.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 style={{ color: '#fff', marginBottom: '8px' }}>3. Partage des informations</h3>
+          <p style={{ color: '#ddd' }}>Nous ne vendons, n'échangeons ni ne louons vos informations personnelles à des tiers. Les données peuvent être stockées et traitées via des services tiers de confiance (comme Google/Firebase) uniquement dans le but de faire fonctionner l'application.</p>
+        </div>
+
+        <div>
+          <h3 style={{ color: '#fff', marginBottom: '8px' }}>4. Sécurité des données</h3>
+          <p style={{ color: '#ddd' }}>Nous mettons en œuvre des mesures de sécurité appropriées pour protéger vos informations contre l'accès non autorisé, l'altération, la divulgation ou la destruction. Toutefois, aucune méthode de transmission sur Internet ou de stockage électronique n'est sûre à 100%.</p>
+        </div>
+
+        <div>
+          <h3 style={{ color: '#fff', marginBottom: '8px' }}>5. Vos droits</h3>
+          <p style={{ color: '#ddd' }}>Vous avez le droit de consulter, de modifier ou de supprimer vos informations personnelles à tout moment depuis les paramètres de l'application. Vous pouvez également demander la suppression de votre compte.</p>
+        </div>
+
+        <div>
+          <h3 style={{ color: '#fff', marginBottom: '8px' }}>6. Modifications de cette politique</h3>
+          <p style={{ color: '#ddd' }}>Nous pouvons mettre à jour cette politique de confidentialité de temps à autre. Toute modification sera publiée sur cette page avec une date de mise à jour modifiée.</p>
+        </div>
+
+        <div>
+          <h3 style={{ color: '#fff', marginBottom: '8px' }}>7. Nous contacter</h3>
+          <p style={{ color: '#ddd' }}>Si vous avez des questions concernant cette politique de confidentialité, veuillez nous contacter via l'application.</p>
+        </div>
+      </div>
+    </>
+  );
+
+  const renderFuelTrackerCGU = () => (
+    <>
+      <h1 style={{ fontFamily: '"Playfair Display", serif', fontSize: '2.5rem', marginBottom: '32px' }}>Conditions Générales d'Utilisation (CGU)</h1>
+      <p style={{ color: '#aaa', marginBottom: '32px' }}>Dernière mise à jour : 9 Octobre 2026</p>
+      
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', lineHeight: '1.6' }}>
+        <div>
+          <h3 style={{ color: '#fff', marginBottom: '8px' }}>1. Acceptation des conditions</h3>
+          <p style={{ color: '#ddd' }}>En téléchargeant ou en utilisant l'application Fuel Tracker, vous acceptez automatiquement de vous soumettre aux présentes conditions générales d'utilisation. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser l'application.</p>
+        </div>
+
+        <div>
+          <h3 style={{ color: '#fff', marginBottom: '8px' }}>2. Description du service</h3>
+          <p style={{ color: '#ddd' }}>Fuel Tracker est une application mobile conçue pour aider les utilisateurs à suivre leur consommation de carburant, leurs dépenses liées aux véhicules et leurs statistiques de conduite.</p>
+        </div>
+
+        <div>
+          <h3 style={{ color: '#fff', marginBottom: '8px' }}>3. Utilisation de l'application</h3>
+          <p style={{ color: '#ddd' }}>Vous vous engagez à utiliser l'application de manière légale et à ne pas utiliser l'application pour des activités frauduleuses, illégales ou non autorisées. Vous êtes responsable du maintien de la confidentialité de vos informations de compte.</p>
+        </div>
+
+        <div>
+          <h3 style={{ color: '#fff', marginBottom: '8px' }}>4. Propriété intellectuelle</h3>
+          <p style={{ color: '#ddd' }}>Tous les éléments présents dans l'application (textes, images, logos, code) sont la propriété exclusive des créateurs de Fuel Tracker. Toute reproduction, distribution ou modification non autorisée est strictement interdite.</p>
+        </div>
+
+        <div>
+          <h3 style={{ color: '#fff', marginBottom: '8px' }}>5. Limitation de responsabilité</h3>
+          <p style={{ color: '#ddd' }}>L'application est fournie "telle quelle", sans aucune garantie. Nous ne saurions être tenus responsables de tout dommage direct ou indirect lié à l'utilisation ou à l'incapacité d'utiliser l'application, y compris la perte de données. Les statistiques et calculs sont fournis à titre indicatif.</p>
+        </div>
+
+        <div>
+          <h3 style={{ color: '#fff', marginBottom: '8px' }}>6. Modification des conditions</h3>
+          <p style={{ color: '#ddd' }}>Nous nous réservons le droit de modifier ces CGU à tout moment. Les modifications prendront effet dès leur publication dans l'application. Votre utilisation continue de l'application constitue votre acceptation des nouvelles conditions.</p>
+        </div>
+
+        <div>
+          <h3 style={{ color: '#fff', marginBottom: '8px' }}>7. Contact</h3>
+          <p style={{ color: '#ddd' }}>Pour toute question concernant ces Conditions Générales d'Utilisation, vous pouvez nous contacter via l'application ou à l'adresse support correspondante.</p>
+        </div>
+      </div>
+    </>
+  );
+
   const renderContent = () => {
+    if (project === 'fuel-tracker') {
+      return isPrivacy ? renderFuelTrackerPrivacy() : renderFuelTrackerCGU();
+    }
     if (project === 'notianote') {
       return isPrivacy ? renderNotianotePrivacy() : renderNotianoteCGU();
     }
